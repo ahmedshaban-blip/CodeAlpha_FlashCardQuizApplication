@@ -184,26 +184,6 @@ flutter test integration_test/
 
 ---
 
-## 🎨 Design System
-
-### Color Palette
-
-<div align="center">
-
-| Primary | Secondary | Success | Warning | Error |
-|---------|-----------|---------|---------|-------|
-| ![#2196F3](https://via.placeholder.com/50x30/2196F3/FFFFFF?text=Primary) | ![#FF9800](https://via.placeholder.com/50x30/FF9800/FFFFFF?text=Secondary) | ![#4CAF50](https://via.placeholder.com/50x30/4CAF50/FFFFFF?text=Success) | ![#FF5722](https://via.placeholder.com/50x30/FF5722/FFFFFF?text=Warning) | ![#F44336](https://via.placeholder.com/50x30/F44336/FFFFFF?text=Error) |
-
-</div>
-
-### Typography
-
-- **Headlines**: Roboto Bold
-- **Body Text**: Roboto Regular  
-- **Captions**: Roboto Light
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Here's how you can help:
