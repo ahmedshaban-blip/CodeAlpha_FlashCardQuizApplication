@@ -67,10 +67,10 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/flashcard-quiz-app.git
+git clone https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication
 
 # Navigate to project directory
-cd flashcard-quiz-app
+cd CodeAlpha_FlashCardQuizApplication
 
 # Install dependencies
 flutter pub get
