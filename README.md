@@ -47,9 +47,9 @@
 
 <div align="center">
 
-| Home Screen | Study View | Flashcard List | Add/Edit |
-|-------------|------------|----------------|----------|
-| <img src="screenshots/home.png" width="200"/> | <img src="screenshots/study.png" width="200"/> | <img src="screenshots/list.png" width="200"/> | <img src="screenshots/add.png" width="200"/> |
+| Study View | Flashcard List | Add/Edit |
+|------------|----------------|----------|
+ <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/1.png?raw=true" width="200"/> | <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/2.png?raw=true" width="200"/> | <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/3.png?raw=true" width="200"/> |
 
 </div>
 
