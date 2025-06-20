@@ -1,4 +1,3 @@
-// lib/cubit/flashcard_cubit.dart
 import 'dart:convert';
 import 'package:flashcard_quiz_app/cubit/flashcard_state.dart';
 import 'package:flashcard_quiz_app/models/flashcard.dart';
@@ -42,7 +41,6 @@ class FlashcardCubit extends Cubit<FlashcardState> {
       );
       await prefs.setString(_flashcardsKey, encodedData);
     } catch (e) {
-      // In a real app, you might want to log this error or show a toast
       print('Failed to save flashcards: ${e.toString()}');
     }
   }
@@ -58,7 +56,7 @@ class FlashcardCubit extends Cubit<FlashcardState> {
           flashcards: updatedFlashcards,
           currentIndex: updatedFlashcards.length - 1,
         ),
-      ); // Go to the new card
+      );
       _saveFlashcards(updatedFlashcards);
     } else if (state is FlashcardEmpty || state is FlashcardInitial) {
       final newFlashcard = Flashcard(question: question, answer: answer);
@@ -95,9 +93,8 @@ class FlashcardCubit extends Cubit<FlashcardState> {
 
       if (updatedFlashcards.isEmpty) {
         emit(FlashcardEmpty());
-        _saveFlashcards([]); // Clear data in storage
+        _saveFlashcards([]);
       } else {
-        // Adjust current index if the deleted card was the current one or if it affected the subsequent card's index
         int newIndex = currentState.currentIndex;
         if (newIndex >= updatedFlashcards.length) {
           newIndex = updatedFlashcards.length - 1;
@@ -106,7 +103,7 @@ class FlashcardCubit extends Cubit<FlashcardState> {
           currentState.copyWith(
             flashcards: updatedFlashcards,
             currentIndex: newIndex,
-            showAnswer: false, // Reset answer view
+            showAnswer: false,
           ),
         );
         _saveFlashcards(updatedFlashcards);

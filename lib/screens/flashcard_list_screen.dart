@@ -1,60 +1,119 @@
 // lib/screens/flashcard_list_screen.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flashcard_quiz_app/cubit/flashcard_cubit.dart';
 import 'package:flashcard_quiz_app/cubit/flashcard_state.dart';
 import 'package:flashcard_quiz_app/screens/add_edit_flashcard_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FlashcardListScreen extends StatelessWidget {
   const FlashcardListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('All Flashcards')),
+      appBar: AppBar(title: const Text('All Flashcards'), centerTitle: true),
       body: BlocBuilder<FlashcardCubit, FlashcardState>(
         builder: (context, state) {
           if (state is FlashcardLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is FlashcardError) {
-            return Center(child: Text('Error: ${state.message}'));
-          } else if (state is FlashcardEmpty) {
+          }
+
+          if (state is FlashcardError) {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('No flashcards found.'),
-                  const SizedBox(height: 16),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const AddEditFlashcardScreen(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.add),
-                    label: const Text('Add New Flashcard'),
-                  ),
-                ],
+              child: Text(
+                'Error: ${state.message}',
+                style: theme.textTheme.bodyLarge,
               ),
             );
-          } else if (state is FlashcardLoaded) {
-            return ListView.builder(
+          }
+
+          if (state is FlashcardEmpty) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.menu_book_outlined,
+                      size: 80,
+                      color: theme.colorScheme.primary,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'No flashcards found.',
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Start by adding your first flashcard to begin your learning journey.',
+                      style: theme.textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.add),
+                      label: const Text('Add New Flashcard'),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const AddEditFlashcardScreen(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 12,
+                        ),
+                        textStyle: const TextStyle(fontSize: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+
+          if (state is FlashcardLoaded) {
+            return ListView.separated(
               itemCount: state.flashcards.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               itemBuilder: (context, index) {
                 final flashcard = state.flashcards[index];
                 return Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: ListTile(
-                    title: Text(flashcard.question),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    title: Text(
+                      flashcard.question,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                     subtitle: Text(
                       flashcard.answer,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
                     ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -63,9 +122,10 @@ class FlashcardListScreen extends StatelessWidget {
                           icon: const Icon(Icons.edit),
                           tooltip: 'Edit',
                           onPressed: () {
-                            Navigator.of(context).push(
+                            Navigator.push(
+                              context,
                               MaterialPageRoute(
-                                builder: (context) => AddEditFlashcardScreen(
+                                builder: (_) => AddEditFlashcardScreen(
                                   flashcard: flashcard,
                                 ),
                               ),
@@ -93,18 +153,19 @@ class FlashcardListScreen extends StatelessWidget {
               },
             );
           }
-          return const SizedBox.shrink();
+
+          return const SizedBox.shrink(); // fallback
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.add),
+        label: const Text('Add'),
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const AddEditFlashcardScreen(),
-            ),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AddEditFlashcardScreen()),
           );
         },
-        child: const Icon(Icons.add),
       ),
     );
   }
@@ -114,23 +175,24 @@ class FlashcardListScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: const Text('Confirm Deletion'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          title: const Text('Delete Flashcard?'),
           content: const Text(
-            'Are you sure you want to delete this flashcard?',
+            'Are you sure you want to delete this flashcard? This action cannot be undone.',
           ),
           actions: <Widget>[
             TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
               child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-              },
             ),
             TextButton(
-              child: const Text('Delete'),
               onPressed: () {
                 context.read<FlashcardCubit>().deleteFlashcard(flashcardId);
                 Navigator.of(dialogContext).pop();
               },
+              child: const Text('Delete', style: TextStyle(color: Colors.red)),
             ),
           ],
         );

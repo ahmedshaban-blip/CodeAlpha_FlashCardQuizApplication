@@ -42,10 +42,8 @@ class _FlashcardDisplayState extends State<FlashcardDisplay>
     super.didUpdateWidget(oldWidget);
     if (widget.showAnswer != oldWidget.showAnswer) {
       if (widget.showAnswer) {
-        // Show answer - animate forward
         _controller.forward();
       } else {
-        // Show question - animate backward
         _controller.reverse();
       }
     }
@@ -66,7 +64,7 @@ class _FlashcardDisplayState extends State<FlashcardDisplay>
         builder: (context, child) {
           final isShowingFront = _animation.value < pi / 2;
           final transform = Matrix4.identity()
-            ..setEntry(3, 2, 0.001) // Perspective
+            ..setEntry(3, 2, 0.001)
             ..rotateY(_animation.value);
 
           return Transform(
