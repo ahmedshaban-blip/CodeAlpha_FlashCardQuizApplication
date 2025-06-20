@@ -47,11 +47,12 @@
 
 <div align="center">
 
-| Study View | Flashcard List | Add/Edit |
-|------------|----------------|----------|
- <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/1.png?raw=true" width="200"/> | <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/2.png?raw=true" width="200"/> | <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/3.png?raw=true" width="200"/> |
+| Study View | Study View | Flashcard List | Add/Edit |
+|------------|------------|----------------|----------|
+| <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/11.png?raw=true" width="200"/> | <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/44%5B1%5D.png?raw=true" width="200"/> | <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/22%5B1%5D.png?raw=true" width="200"/> | <img src="https://github.com/ahmedshaban-blip/CodeAlpha_FlashCardQuizApplication/blob/main/Screenshots/33%5B1%5D.png?raw=true" width="200"/> |
 
 </div>
+
 
 ---
 
